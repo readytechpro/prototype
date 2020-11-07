@@ -17,5 +17,5 @@ class FrequentQuestion(CopyText):
         return self.text
 
     def __str__(self):
-        return f'{self.precedence} - {self.label}: {self.text[:10]}'
+        return f'{self.votes} - {self.label}: {self.question_text[:10]}'
         
