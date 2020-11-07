@@ -1,0 +1,9 @@
+<h1>Frequently Asked Questions</h1>
+<hr>
+{% for faq in faqs %}
+<div>
+<h3>{{ faq.question_text }}</h3>
+<p>{{ faq.answer_text }}</p>
+<hr>
+</div>
+{% endfor %}
