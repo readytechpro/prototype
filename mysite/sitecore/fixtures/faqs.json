@@ -1,0 +1,38 @@
+[
+{
+    "model": "sitecore.frequentquestion",
+    "pk": 1,
+    "fields": {
+        "question_text": "What is Ready Tech Pro, Inc.?",
+        "answer_text": "Our company is a nonprofit public charity pending 501 (c)(3) approval. We are registered in Oregon. We are currently in the process of developing our programs on this platform. We hope that providing these services will help people living with a disability improve their quality of life.", 
+        "votes": 1
+    }
+},
+{
+    "model": "sitecore.frequentquestion",
+    "pk": 2,
+    "fields": {
+        "question_text": "Who can join?",
+        "answer_text": "We welcome anyone who wants to help others. We need all ability levels so we can reach as many people as possible. Certain services must be limited to those who identify as a member of our target community.", 
+        "votes": 3
+    }
+},
+{
+    "model": "sitecore.frequentquestion",
+    "pk": 3,
+    "fields": {
+        "question_text": "What is a disability?",
+        "answer_text": "We generally follow the ADA definition for disability. We will never ask you to explicitly qualify your level of disability to us. Full services will be available to members who can acknowledge that they live with something that impacts their ability to find work.", 
+        "votes": 3
+    }
+},
+{
+    "model": "sitecore.frequentquestion",
+    "pk": 4,
+    "fields": {
+        "question_text": "How can I get involved?",
+        "answer_text": "We need help from everyone who is willing to offer us some of their time. See our Opportunities page to learn more.", 
+        "votes": 3
+    }
+}
+]
