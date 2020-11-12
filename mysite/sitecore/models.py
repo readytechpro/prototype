@@ -8,14 +8,11 @@ class CopyText(models.Model):
         return f'{self.label}: {self.text[:10]}'
 
 
-class FrequentQuestion(CopyText):
+class FrequentQuestion(models.Model):
     question_text = models.CharField(max_length=150)
+    answer_text = models.TextField()
     votes = models.IntegerField()
 
-    @property
-    def answer_text(self):
-        return self.text
-
     def __str__(self):
-        return f'{self.votes} - {self.label}: {self.question_text[:10]}'
+        return f'{self.votes}: {self.question_text[:10]}'
         
