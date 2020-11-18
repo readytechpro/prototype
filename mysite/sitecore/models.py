@@ -1,6 +1,7 @@
 from django.db import models
 
 class CopyText(models.Model):
+    title = models.CharField(max_length=50)
     label = models.CharField(max_length=25)
     text = models.TextField()
 
