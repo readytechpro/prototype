@@ -1,3 +1,6 @@
-<h1>About Our {{ about_copy.title }} Program</h1>
+<h1>About Our {{ page.title }} Program</h1>
 <hr>
-<p>{{ about_copy.text }}</p>
+{% for segment in segments %}
+<h2>{{ segment.title }}</h2>
+<p>{{ segment.text }}</p>
+{% endfor %}
