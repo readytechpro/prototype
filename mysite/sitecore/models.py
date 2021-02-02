@@ -1,12 +1,22 @@
 from django.db import models
 
-class CopyText(models.Model):
+class Page(models.Model):
+    label = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
-    label = models.CharField(max_length=25)
-    text = models.TextField()
 
     def __str__(self):
-        return f'{self.label}: {self.text[:10]}'
+        return f'{self.label}'
+
+
+class CopyText(models.Model):
+    page = models.ForeignKey(Page, on_delete=models.CASCADE, null=True)
+    label = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
+    text = models.TextField()
+    position = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.page.label}: {self.position}: {self.title[:10]}: {self.text[:7]}'
 
 
 class FrequentQuestion(models.Model):
