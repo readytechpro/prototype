@@ -1,0 +1,8 @@
+{% if not projects %}
+There are no volunteer projects
+{% else %}
+<h1>Volunteer Projects</h1>
+{% for project in projects %}
+<p>{{ project.title }}</p>
+{% endfor %}
+{% endif %}
