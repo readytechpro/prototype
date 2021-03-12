@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import (
+    VolunteerProject, VolunteerProjectDetail, VolunteerProjectDetailCategory 
+)
 
-# Register your models here.
+admin.site.register(VolunteerProject)
+admin.site.register(VolunteerProjectDetail)
+admin.site.register(VolunteerProjectDetailCategory)
