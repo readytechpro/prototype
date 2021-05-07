@@ -1,0 +1,10 @@
+{% if learning_resources %}
+<h2>All learning Resources</h2>
+{% for resource in learning_resources %}
+<a href="{{ resource.notion_link }}" target="_blank">{{ resource.title }}</a><br>
+<hr>
+{% endfor %}
+{% else %}
+<p>No Learning Tracks</p>
+
+{% endif %}

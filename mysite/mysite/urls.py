@@ -18,6 +18,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('volunteering/', include('volunteering.urls')),
+    path('resources/', include('resources.urls')),
     path('', include('sitecore.urls')),
     path('admin/', admin.site.urls),
 ]
