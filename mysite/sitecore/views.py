@@ -4,7 +4,9 @@ from django.views.generic import ListView
 from .models import FrequentQuestion, CopyText, Page, SectionTitle
 
 def index(request):
-    return render(request, 'sitecore/index.html')
+    about_pages = Page.objects.all()
+    context = {'about_pages': about_pages}
+    return render(request, 'sitecore/index.html', context)
 
 def about_program(request, program_name):
     page = Page.objects.get(label=program_name)

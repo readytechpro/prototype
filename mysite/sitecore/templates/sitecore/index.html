@@ -1,2 +1,20 @@
-<h1>Welcome Home</h1>
+<h1>Welcome to Ready Tech Pro</h1>
 <p>You are at the main page.</p>
+<hr>
+<hr>
+{% if about_pages %}
+<h3>About our programs in development</h3>
+<hr>
+{% for page in about_pages %}
+<a href="{% url 'sitecore:about-program-detail' page.label %}">About our {{ page.title }} Program</a><br>
+<hr>
+{% endfor %}
+{% endif %}
+<hr>
+<a href="{% url 'resources:index' %}">Resources Program portal</a>
+<hr>
+<hr>
+<a href="{% url 'volunteering:index' %}">Volunteering portal</a>
+<hr>
+<hr>
+<a href="{% url 'sitecore:faq' %}">Visit our FAQs page</a>
