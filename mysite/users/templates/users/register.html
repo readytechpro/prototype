@@ -1,0 +1,17 @@
+{% load crispy_forms_tags %}
+{% if form %}
+<form method="POST">
+{% csrf_token %}
+<fieldset>
+    <legend>Create an account</legend>
+    {{ form|crispy }}
+</fieldset>
+<div>
+    <button type="submit">Sign Up</button>
+</div>
+</form>
+<div>
+    <p>already have an account?</p>
+    <a href="#">sign in</a>
+</div>
+{% endif %}
