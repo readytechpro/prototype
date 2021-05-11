@@ -1,3 +1,5 @@
+{% extends "sitecore/base.html" %}
+{% block content %}
 <h1>Welcome to Ready Tech Pro</h1>
 <p>You are at the main page.</p>
 <hr>
@@ -9,7 +11,9 @@
 <a href="{% url 'sitecore:about-program-detail' page.label %}">About our {{ page.title }} Program</a><br>
 <hr>
 {% endfor %}
+<hr>
 {% endif %}
+<h3>More</h3>
 <hr>
 <a href="{% url 'resources:index' %}">Resources Program portal</a>
 <hr>
@@ -18,3 +22,4 @@
 <hr>
 <hr>
 <a href="{% url 'sitecore:faq' %}">Visit our FAQs page</a>
+{% endblock content %}
