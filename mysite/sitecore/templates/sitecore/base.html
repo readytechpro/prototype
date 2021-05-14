@@ -24,12 +24,17 @@
 </style>
 </head>
 <body>
-    {% if messages %}
+{% if messages %}
 {% for message in messages %}
 <p>{{ message }}</p>
+<hr>
 {% endfor %}
 {% endif %}
-
+{% if user.is_authenticated %}
+<a href="{% url 'users:logout' %}">Logout</a>
+{% else %}
+<a href="{% url 'users:login' %}">Login</a>
+{% endif %}
     {% block content %}
     <p>no page content</p>
     {% endblock content %}

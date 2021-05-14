@@ -9,8 +9,8 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'A new Ready Tech Pro account has been created for {username}')
-            return redirect('sitecore:index')
+            messages.success(request, f'A new Ready Tech Pro account has been created for {username}. You can now log in.')
+            return redirect('sitecore:login')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', context={'form': form})
