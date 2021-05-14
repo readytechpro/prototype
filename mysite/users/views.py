@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegisterForm
 
@@ -10,7 +11,11 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'A new Ready Tech Pro account has been created for {username}. You can now log in.')
-            return redirect('sitecore:login')
+            return redirect('users:login')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', context={'form': form})
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')
