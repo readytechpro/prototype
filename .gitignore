@@ -1,2 +1,3 @@
 *.pyc
 mysite/media/*
+mysite/private_config.json
