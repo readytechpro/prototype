@@ -1,0 +1,29 @@
+{% extends "resources/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+            {% if object %}
+            <legend>Update this Learning Track</legend>
+            {% else %}
+            <legend>Create a new Learning Track</legend>
+            {% endif %}
+            {{ form|crispy }}
+        </fieldset>
+        <div>
+            {% if object %}
+            <button type="submit">Update</button>
+            {% else %}
+            <button type="submit">Create</button>
+            {% endif %}        
+        </div>
+    </form>
+    <br>
+    <hr>
+    {% if object %}
+    <small><a href="{% url 'resources:resource_delete' object.pk %}">Delete this Learning Track</a></small>
+    {% endif %}
+</div>
+{% endblock content %}

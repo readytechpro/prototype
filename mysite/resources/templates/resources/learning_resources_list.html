@@ -1,10 +1,19 @@
+{% extends "resources/base.html" %}
+{% block content %}
 {% if learning_resources %}
-<h2>All learning Resources</h2>
-{% for resource in learning_resources %}
-<a href="{{ resource.notion_link }}" target="_blank">{{ resource.title }}</a><br>
-<hr>
-{% endfor %}
+    {% if user_resources %}
+    <h2>{{ request.user }}'s learning tracks</h2>
+    {% else %}
+    <h2>All learning tracks</h2>
+    {% endif %}
+    {% for resource in learning_resources %}
+    <a href="{% url 'resources:resource_detail' resource.pk %}">{{ resource.title }}</a>
+    <small><a href="{{ resource.notion_link }}" target="_blank">[Open Link]</a></small>
+    <br>
+    <hr>
+    {% endfor %}
 {% else %}
-<p>No Learning Tracks</p>
+    <p>No Learning Tracks</p>
 
 {% endif %}
+{% endblock content %}

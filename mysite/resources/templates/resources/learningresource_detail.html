@@ -1,0 +1,24 @@
+{% extends "resources/base.html" %}
+{% block content %}
+<h1>
+    Learning Track "{{ object.title }}" Detail
+</h1>
+{% if can_edit %}
+<p>
+    <small><a href="{% url 'resources:resource_update' object.pk %}">Edit this Learning Track</a></small>
+</p>
+{% endif %}
+<p>Title: {{object.title}}</p>
+<p>
+    Link url: {{object.notion_link}} 
+    <small><a href="{{ object.notion_link }}" target="_blank">Follow Link</a></small>
+</p>
+{% if user_tracks %}
+<p>
+    <a href="{% url 'resources:my_learning_resources' %}">Back to my learning tracks</a>
+</p>
+{% endif %}
+<p>
+    <a href="{% url 'resources:all_learning_resources' %}">Back to all learning tracks</a>
+</p>
+{% endblock content %}
