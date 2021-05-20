@@ -1,2 +1,12 @@
+{% extends "resources/base.html" %}
+{% block content %}
 <h3>Welcome to the Resources app</h3>
-<a href="{% url 'resources:all_learning_resources' %}">All resource lists</a>
+<p>
+    <a href="{% url 'resources:all_learning_resources' %}">All resource lists</a>
+</p>
+{% if user_tracks %}
+<p>
+    <a href="{% url 'resources:my_learning_resources' %}">My resource lists [{{ user_tracks }}]</a>
+</p>
+{% endif %}
+{% endblock content %}

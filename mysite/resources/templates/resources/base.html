@@ -1,0 +1,7 @@
+{% extends "sitecore/base.html" %}
+{% block appnav %}
+<a href="{% url 'resources:index' %}">Resources Home | </a>
+<a href="{% url 'resources:all_learning_resources' %}">All Tracks | </a>
+<a href="{% url 'resources:resource_create' %}">New Track</a>
+<hr>
+{% endblock appnav %}
