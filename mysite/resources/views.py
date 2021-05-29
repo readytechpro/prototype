@@ -6,7 +6,10 @@ from django.views.generic import (
 from .models import LearningResource
 
 def index(request):
-    context = {'user_tracks': LearningResource.objects.filter(user=request.user).count()}
+    if request.user.is_authenticated:
+        context = {'user_tracks': LearningResource.objects.filter(user=request.user).count()}
+    else:
+        context = {'user_tracks': 0}
     return render(request, 'resources/index.html', context)
 
 
