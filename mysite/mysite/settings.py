@@ -27,7 +27,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.getenv('GAE_APPLICATION', None):
+    DEBUG = False
+else:
+    DEBUG = True
 MIGRATE_PRODUCTION_DB = False
 
 ALLOWED_HOSTS = ['*']
