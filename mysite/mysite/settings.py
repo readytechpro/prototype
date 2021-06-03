@@ -94,7 +94,7 @@ pymysql.version_info = (1, 4, 6, 'final', 0)  # change mysqlclient version
 pymysql.install_as_MySQLdb()
 
 # [START db_setup]
-if os.getenv('GAE_APPLICATION', None) or MIGRATE_PRODUCTION_DB:
+if os.getenv('GAE_APPLICATION', None):
     # Running on production App Engine, so connect to Google Cloud SQL using
     # the unix socket at /cloudsql/<your-cloudsql-connection string>
     DATABASES = {
@@ -104,6 +104,17 @@ if os.getenv('GAE_APPLICATION', None) or MIGRATE_PRODUCTION_DB:
             'USER': f"{config['YOUR-USERNAME']}",
             'PASSWORD': f"{config['YOUR-PASSWORD']}",
             'NAME': f"{config['PRODUCTION-DATABASE']}",
+        }
+    }
+elif MIGRATE_PRODUCTION_DB:
+        DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+            'NAME': f"{config['DEVELOPMENT-DATABASE']}",
+            'USER': f"{config['YOUR-USERNAME']}",
+            'PASSWORD': f"{config['YOUR-PASSWORD']}",
         }
     }
 else:
