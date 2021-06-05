@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 import json
+from google.oauth2 import service_account
 
 with open('private_config.json') as config_file:
     config = json.load(config_file)
@@ -31,6 +32,7 @@ if os.getenv('GAE_APPLICATION', None):
     DEBUG = False
 else:
     DEBUG = True
+
 MIGRATE_PRODUCTION_DB = False
 
 ALLOWED_HOSTS = ['*']
@@ -187,6 +189,11 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(os.path.join(BASE_DIR, 'storage_credentials.json'))
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = config['GS_BUCKET_NAME']
+STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'sitecore:index'
@@ -198,3 +205,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config['EMAIL_ACCOUNT']
 EMAIL_HOST_PASSWORD = config['EMAIL_APP_PASSWORD']
+
