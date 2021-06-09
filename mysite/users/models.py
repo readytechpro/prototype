@@ -12,14 +12,18 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+        self.__resize_image()
 
-        img = Image.open(self.image)
+    def __resize_image(self):
         MAX_WIDTH = 300
-        if img.width > MAX_WIDTH:
-            resize_ratio = MAX_WIDTH / img.width
-            output_size = (int(img.width * resize_ratio), int(img.height * resize_ratio))
-            img = img.resize(output_size)
+        MAX_HEIGHT = 600
+        with Image.open(self.image) as img:
+            if img.width > MAX_WIDTH or img.height > MAX_HEIGHT:
+                resize_ratio = min(
+                    (MAX_WIDTH / img.width), (MAX_HEIGHT / img.height))
+                output_size = (int(img.width * resize_ratio), int(img.height * resize_ratio))
+                img = img.resize(output_size)
+
+            with storage.open(self.image.name, "w") as file_handler:
+                img.save(file_handler, 'png')
             
-        file_handler = storage.open(self.image.name, "w")
-        img.save(file_handler, 'png')
-        file_handler.close()
