@@ -114,7 +114,7 @@ elif MIGRATE_PRODUCTION_DB:
             'ENGINE': 'django.db.backends.mysql',
             'HOST': '127.0.0.1',
             'PORT': '3306',
-            'NAME': f"{config['DEVELOPMENT-DATABASE']}",
+            'NAME': f"{config['PRODUCTION-DATABASE']}",
             'USER': f"{config['YOUR-USERNAME']}",
             'PASSWORD': f"{config['YOUR-PASSWORD']}",
         }
