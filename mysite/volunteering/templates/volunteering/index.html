@@ -1,8 +1,7 @@
-{% if not projects %}
-There are no volunteer projects
-{% else %}
-<h1>Volunteer Projects</h1>
-{% for project in projects %}
-<p>{{ project.title }}</p>
-{% endfor %}
-{% endif %}
+{% extends "volunteering/base.html" %}
+{% block content %}
+<h3>Welcome to the Volunteer Projects app</h3>
+<p>
+    <a href="{% url 'volunteering:all_volunteer_projects' %}">All Volunteer Projects</a>
+</p>
+{% endblock content %}

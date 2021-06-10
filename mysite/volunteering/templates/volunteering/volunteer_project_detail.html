@@ -1,0 +1,18 @@
+{% extends "volunteering/base.html" %}
+{% block content %}
+<h1>
+    Learning Track "{{ project.title }}" Detail
+</h1>
+<p>Title: {{project.title}}</p>
+<p>
+    Project Details
+</p>
+{% if user_projects %}
+<p>
+    <a href="{% url 'volunteering:my_volunteer_projects' %}">Back to my Volunteer Projects</a>
+</p>
+{% endif %}
+<p>
+    <a href="{% url 'volunteering:all_volunteer_projects' %}">Back to all Volunteer Projects</a>
+</p>
+{% endblock content %}

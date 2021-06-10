@@ -1,0 +1,13 @@
+{% extends "volunteering/base.html" %}
+{% block content %}
+{% if not projects %}
+    There are no volunteer projects
+{% else %}
+    <h1>Volunteer Projects</h1>
+    {% for project in projects %}
+        <a href="{% url 'volunteering:project_detail' project.pk %}">{{ project.title }}</a>
+        <br>
+        <hr>
+    {% endfor %}
+{% endif %}
+{% endblock content %}
