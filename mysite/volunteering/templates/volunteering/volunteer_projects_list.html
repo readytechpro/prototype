@@ -1,13 +1,35 @@
 {% extends "volunteering/base.html" %}
+{% load static %}
 {% block content %}
 {% if not projects %}
     There are no volunteer projects
 {% else %}
     <h1>Volunteer Projects</h1>
-    {% for project in projects %}
-        <a href="{% url 'volunteering:project_detail' project.pk %}">{{ project.title }}</a>
-        <br>
-        <hr>
+    {% for project in  projects %}
+    <div class="row justify-content-center align-items-center card">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-9 text-left" style="background-color: rgba(28, 153, 84, 0.3);">
+            <div class="row card-body">
+                <div class="col-2" id="entry-section">
+                    <a href="{% url 'volunteering:project_detail' project.pk %}">
+                        <img src="{% static 'sitecore/img/placeholder.png' %} " width="100px" height="100px">
+                    </a>
+                </div>
+                <div class="col-5" id="entry-section">
+                    <a class="text-muted" id="entry-text-section" href="{% url 'volunteering:project_detail' project.pk %}">{{ project.title }}</a>
+                    <p class="text-white" id="entry-text-section" style="font-size: 18px;"><strong>{{ project.tagline }}</strong></p>
+                </div>
+                
+                <div class="col" id="entry-section">
+                    {% for category_tag in project.tags.all %}
+                    <button class="btn btn-outline-dark btn-sm" id="tag-badge" type="button">{{ category_tag }}</button>
+                    {% endfor %}
+                </div>
+                <div class="col-2 text-center" id="entry-section">
+                    <a href="{% url 'volunteering:project_detail' project.pk %}" class="btn btn-info btn-lg">View</a>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
 {% endif %}
 {% endblock content %}
