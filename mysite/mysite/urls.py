@@ -26,6 +26,4 @@ urlpatterns = [
     path('', include('sitecore.urls')),
 ]
 
-#static file access must be reconfigured for production
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
