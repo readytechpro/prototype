@@ -1,3 +1,5 @@
+{% extends "sitecore/base.html" %}
+{% block content %}
 <h1>About Our {{ page.title }} Program</h1>
 <hr>
 {% for section, copy_items in sections %}
@@ -13,3 +15,4 @@
     {% endfor %}
     </ul>
 {% endfor %}
+{% endblock content %}
