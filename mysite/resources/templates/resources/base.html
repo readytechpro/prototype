@@ -1,7 +1,14 @@
 {% extends "sitecore/base.html" %}
 {% block appnav %}
-<a href="{% url 'resources:index' %}">Resources Home | </a>
-<a href="{% url 'resources:all_learning_resources' %}">All Tracks | </a>
-<a href="{% url 'resources:resource_create' %}">New Track</a>
-<hr>
+
+<nav class="navbar navbar-light navbar-expand-md navigation-clean">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'resources:index' %}" style="font-size: 18px;">Resources <i class="fa fa-gear" style="color: rgb(28,153,84);"></i></a>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="{% url 'resources:resource_create' %}">New Track</a></li>
+        </ul>
+        </div>
+    </div>
+</nav>
+
 {% endblock appnav %}
