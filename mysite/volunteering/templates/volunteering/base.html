@@ -1,7 +1,10 @@
 {% extends "sitecore/base.html" %}
 {% block appnav %}
-<div>
-    <a href="{% url 'volunteering:index' %}">Volunteering Home | </a>
-</div>
-<hr>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'volunteering:index' %}" style="font-size: 18px;">Volunteering <i class="fa fa-gear" style="color: rgb(28,153,84);"></i></a>
+            
+            </div>
+        </div>
+    </nav>
 {% endblock appnav %}
