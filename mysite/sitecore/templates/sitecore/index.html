@@ -1,25 +1,97 @@
 {% extends "sitecore/base.html" %}
+{% load static %}
 {% block content %}
-<h1>Welcome to Ready Tech Pro</h1>
-<p>You are at the main page.</p>
-<hr>
-<hr>
+
+<header class="text-center" style="color: rgb(28,153,84);">
+    <h1>Welcome to Ready Tech Pro</h1><img src="{% static 'sitecore/img/banner.png' %}">
+</header>
+<div class="card">
+    <div class="card-header">
+        <h4>App links</h4>
+    </div>
+    <div class="card-body">
+        <p class="card-text">Here are some apps that are currently under development. Please check them out!&nbsp;</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-3"><a href="{% url 'resources:index' %}"><img class="img-thumbnail img-fluid" src="{% static 'sitecore/img/accept-request.png' %}"></a></div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'resources:index' %}"><h4 class="card-title" style="color: #1c9954;">Resoureces Portal</h4></a>
+                    <h6 class="text-muted card-subtitle mb-2">A system for discovering, organizing, and sharing online learning resources.&nbsp;</h6>
+                    <p class="card-text">Discover, organize, personalize, and share skill-based lists of online educational resources that are curated for our community.</p>
+                    <a class="card-link" href="{% url 'resources:index' %}">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-3"><a href="{% url 'volunteering:index' %}"><img class="img-thumbnail img-fluid" src="{% static 'sitecore/img/joy.png' %}"></a></div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'volunteering:index' %}"><h4 class="card-title" style="color: #1c9954;">Volunteering Portal</h4></a>
+                    <h6 class="text-muted card-subtitle mb-2">Contribute to volunteer projects and help develop Ready Tech Pro</h6>
+                    <p class="card-text">Ready Tech Pro needs your help! Please consider applying for one of these low-commitment volunteer projects and contribute to the development of our nonprofit platform.</p>
+                    <a class="card-link" href="{% url 'volunteering:index' %}">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% if about_pages %}
-<h3>About our programs in development</h3>
-<hr>
+<div class="card">
+    <div class="card-header">
+        <h4>About our programs in development</h4>
+    </div>
+    <div class="card-body">
+        <p class="card-text">These are the main programs that we are currently developing for our community.&nbsp;</p>
+    </div>
+</div>
 {% for page in about_pages %}
-<a href="{% url 'sitecore:about-program-detail' page.label %}">About our {{ page.title }} Program</a><br>
-<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-3"><a href="{% url 'sitecore:about-program-detail' page.label %}"><img class="img-thumbnail img-fluid" src="{% static 'sitecore/img/placeholder.png' %}"></a></div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'sitecore:about-program-detail' page.label %}"><h4 class="card-title" style="color: #1c9954;">{{ page.title }}</h4></a>
+                    <h6 class="text-muted card-subtitle mb-2">Program summary line&nbsp;</h6>
+                    <p class="card-text">Program short description.</p>
+                    <a class="card-link" href="{% url 'sitecore:about-program-detail' page.label %}">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endfor %}
-<hr>
 {% endif %}
-<h3>More</h3>
-<hr>
-<a href="{% url 'resources:index' %}">Resources Program portal</a>
-<hr>
-<hr>
-<a href="{% url 'volunteering:index' %}">Volunteering portal</a>
-<hr>
-<hr>
-<a href="{% url 'sitecore:faq' %}">Visit our FAQs page</a>
+<div class="card">
+    <div class="card-header">
+        <h4>More</h4>
+    </div>
+    <div class="card-body">
+        <p class="card-text">Read and submit questions to our FAQs&nbsp;</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-3"><img class="img-thumbnail img-fluid" src="{% static 'sitecore/img/faq.png' %}"></div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'sitecore:faq' %}"><h4 class="card-title" style="color: #1c9954;">FAQs</h4></a>
+                    <h6 class="text-muted card-subtitle mb-2">Frequently Asked Questions</h6>
+                    <p class="card-text">Visit our FAQ page to learn more.</p>
+                    <a class="card-link" href="{% url 'sitecore:faq' %}">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
