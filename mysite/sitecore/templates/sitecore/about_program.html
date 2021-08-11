@@ -1,18 +1,44 @@
 {% extends "sitecore/base.html" %}
 {% block content %}
-<h1>About Our {{ page.title }} Program</h1>
-<hr>
-{% for section, copy_items in sections %}
-    <hr>
-    <h2>{{ section.title.title }}</h2>
-    <ul>
-    {% for item in copy_items%}
-        {% if copy_items|length == 1 %}
-            <p>{{ item.text }}</p>
-        {% else %}
-            <li>{{ item.text }}</li>
-        {% endif %}
+<header class="text-center">
+    <h1 class="text-black-50">About Our {{ page.title|title }} Program</h1>
+</header>
+<div class="card border-dark" style="margin: 10px;border-radius: 5px;border-width: 1px;box-shadow: 1px 1px 2px 1px rgba(28,153,84,0.8);">
+    <div class="card-header" style="background: rgba(28,153,84,0.4);">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h5 class="mb-0">{{ project.title }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for section, copy_items in sections %}
+    <div class="card-body">
+        <h5 style="color: rgb(28,153,84);">{{ section.title.title }}</h5>
+        <ul class="list-group">
+                {% for item in copy_items %}
+                <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ item.text }}</span></li>
+                {% endfor %}
+            </ul>
+        </div>
     {% endfor %}
-    </ul>
-{% endfor %}
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"><a class="btn btn-secondary" target="_blank" role="button" href="https://www.readytechpro.org/community"><strong>Join</strong> us</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="margin: 0px;background: rgba(28,153,84,0.2);">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col"><a class="btn btn-outline-secondary" role="button" style="border-width: 2px;" href="{% url 'sitecore:index' %}">back to <strong>home</strong></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
