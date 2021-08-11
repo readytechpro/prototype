@@ -1,30 +1,47 @@
 {% extends "volunteering/base.html" %}
 {% block content %}
-<h1>
-    {{ project.title }}
-</h1>
-<p>Volunteer Project</p>
-<hr>
-{% for category, detail_list in categories_detials.items %}
-    <h3>
-        {{ category }}
-    </h3>
-    {% for detail in detail_list %}
-    <ul>
-        <li>
-            <p>
-                {{ detail }}
-            </p>
-        </li>
-    </ul>
+<header class="text-center">
+    <h1 class="text-black-50">Volunteer Project Detail</h1>
+</header>
+<div class="card border-dark" style="margin: 10px;border-radius: 5px;border-width: 1px;box-shadow: 1px 1px 2px 1px rgba(28,153,84,0.8);">
+    <div class="card-header" style="background: rgba(28,153,84,0.4);">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h5 class="mb-0">{{ project.title }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for category, detail_list in categories_detials.items %}
+    <div class="card-body">
+        <h5 style="color: rgb(28,153,84);">{{ category }}</h5>
+        <ul class="list-group">
+                {% for detail in detail_list %}
+                <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ detail }}</span></li>
+                {% endfor %}
+            </ul>
+        </div>
     {% endfor %}
-{% endfor %}
-{% if user_projects %}
-<p>
-    <a href="{% url 'volunteering:my_volunteer_projects' %}">Back to my Volunteer Projects</a>
-</p>
-{% endif %}
-<p>
-    <a href="{% url 'volunteering:all_volunteer_projects' %}">Back to all Volunteer Projects</a>
-</p>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"><a class="btn btn-secondary" role="button" href="#"><strong>Apply</strong> to manage this project</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="margin: 0px;background: rgba(28,153,84,0.2);">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6"><a class="btn btn-outline-secondary" role="button" style="border-width: 2px;" href="{% url 'volunteering:all_volunteer_projects' %}">back to <strong>All</strong> Projects</a></div>
+                {% if user_projects %}
+                <div class="col-6"><a class="btn btn-outline-secondary" role="button" style="border-width: 2px;" href="#">back to <strong>My</strong> Projects</a></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
