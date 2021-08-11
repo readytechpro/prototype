@@ -1,24 +1,53 @@
 {% extends "sitecore/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div>
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset>
-            <legend>Sign in to your account</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div>
-            <button type="submit">Log In</button>
+<header class="text-center">
+    <h1 class="text-black-50">Sign in to Your Ready Tech Pro Account</h1>
+</header>
+<div class="card border-dark" style="margin: 10px;border-radius: 5px;border-width: 1px;box-shadow: 1px 1px 2px 1px rgba(28,153,84,0.8);">
+    <div class="card-header" style="background: rgba(28,153,84,0.4);">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h5 class="mb-0"> </h5>
+                </div>
+            </div>
         </div>
-    </form>
-    <div>
-        <p>Forgot your password?</p>
-        <a href="{% url 'users:password_reset' %}">Reset Password</a>
     </div>
-    <div>
-        <p>Don't have an account?</p>
-        <a href="{% url 'users:register' %}">Register</a>
+    <div class="card-body">
+        <div class="container">
+            {% if form %}
+            <div class="row">
+                <div class="col" style="background: rgba(28,153,84,0.1);">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                            <h2 class="text-center">sign in</h2>
+                            <div class="form-group">{{ form|crispy }}</div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-secondary"><strong>Log In</strong></button>
+                    </div>
+                </div>
+            </form>
+            {% endif %}
+        </div>
     </div>
 </div>
+<div class="card" style="margin: 0px;background: rgba(28,153,84,0.2);">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6"><a class="btn btn-outline-secondary" role="button" style="border-width: 2px;" href="{% url 'users:password_reset' %}">Forgot your password? <strong>Reset</strong></a></div>
+                <div class="col-6"><a class="btn btn-outline-secondary" role="button" style="border-width: 2px;" href="{% url 'users:register' %}">Need an account? <strong>Register</strong></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}

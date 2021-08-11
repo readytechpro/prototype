@@ -1,17 +1,53 @@
+{% extends "sitecore/base.html" %}
 {% load crispy_forms_tags %}
-{% if form %}
-<form method="POST">
-{% csrf_token %}
-<fieldset>
-    <legend>Create an account</legend>
-    {{ form|crispy }}
-</fieldset>
-<div>
-    <button type="submit">Sign Up</button>
+{% block content %}
+<header class="text-center">
+    <h1 class="text-black-50">Sign Up for a Ready Tech Pro Account</h1>
+</header>
+<div class="card border-dark" style="margin: 10px;border-radius: 5px;border-width: 1px;box-shadow: 1px 1px 2px 1px rgba(28,153,84,0.8);">
+    <div class="card-header" style="background: rgba(28,153,84,0.4);">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h5 class="mb-0"> </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            {% if form %}
+            <div class="row">
+                <div class="col" style="background: rgba(28,153,84,0.1);">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                            <h2 class="text-center">create your account</h2>
+                            <div class="form-group">{{ form|crispy }}</div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-secondary"><strong>Sign Up</strong></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+        </div>
+    </div>
 </div>
-</form>
-<div>
-    <p>already have an account?</p>
-    <a href="{% url 'users:login' %}">sign in</a>
+<div class="card" style="margin: 0px;background: rgba(28,153,84,0.2);">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col"><a class="btn btn-outline-secondary" role="button" style="border-width: 2px;" href="{% url 'users:login' %}">Already registered? <strong>Log In</strong></a></div>
+            </div>
+        </div>
+    </div>
 </div>
-{% endif %}
+
+{% endblock content %}
