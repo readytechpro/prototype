@@ -3,3 +3,4 @@ mysite/media/*
 mysite/private_config.json
 mysite/static/*
 mysite/storage_credentials.json
+design_project/bsstudio_export/*
