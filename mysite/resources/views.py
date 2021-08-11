@@ -4,6 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     DetailView, ListView, CreateView, UpdateView, DeleteView)
 from .models import LearningResource
+from .forms import LearningResourceCreateForm, LearningResourceUpdateForm
+import random 
 
 def index(request):
     if request.user.is_authenticated:
@@ -12,12 +14,33 @@ def index(request):
         context = {'user_tracks': 0}
     return render(request, 'resources/index.html', context)
 
+def get_colors(list_length):
+    colors = []
+
+    for item in range(list_length):
+        green_color = [28, 153, 84]
+        variance_coeff = 0.15
+        new_color = []
+        for component in green_color:
+            value_range = [int(component - (component * variance_coeff)), int(component + (component * variance_coeff))]
+            random_value = random.randint(*value_range)
+            new_color.append(random_value)
+
+        colors.append(new_color)
+    return colors
+
 
 class LearningResourceListView(ListView):
     model = LearningResource
     template_name = 'resources/learning_resources_list.html'
     context_object_name = 'learning_resources'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        colors = get_colors(len(context['learning_resources']))
+
+        context['learning_resources'] = zip(context['learning_resources'], colors)
+        return context
 
 class UserLearningResourceListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = LearningResource
@@ -29,6 +52,9 @@ class UserLearningResourceListView(LoginRequiredMixin, UserPassesTestMixin, List
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        colors = get_colors(len(context['learning_resources']))
+
+        context['learning_resources'] = zip(context['learning_resources'], colors)
         context['user_resources'] = True
         return context
 
@@ -58,7 +84,7 @@ class LearningResourceDetailView(LoginRequiredMixin, DetailView):
 
 class LearningResourceCreateView(LoginRequiredMixin, CreateView):
     model = LearningResource
-    fields = ['title', 'notion_link']
+    form_class = LearningResourceCreateForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -67,7 +93,7 @@ class LearningResourceCreateView(LoginRequiredMixin, CreateView):
     
 class LearningResourceUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = LearningResource
-    fields = ['title', 'notion_link']
+    form_class = LearningResourceUpdateForm
 
     def test_func(self):
         if self.get_object().user == self.request.user:
