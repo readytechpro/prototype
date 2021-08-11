@@ -19,8 +19,12 @@
 
 {% if messages %}
 {% for message in messages %}
-<p>{{ message }}</p>
-<hr>
+<div role="alert" class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+    <span>{{ message }}</span>
+</div>
 {% endfor %}
 {% endif %}
 
@@ -34,8 +38,8 @@
         
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="{% url 'users:profile' %}">profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'users:logout' %}">log out</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'users:profile' %}">profile</a></li>
             </ul>
         </div>
     </div>
@@ -54,7 +58,8 @@
             <i class="fa fa-home" style="color: rgb(28,153,84);"></i>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="{% url 'users:login' %}">Log in</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'users:login' %}">log in</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'users:register' %}">register</a></li>
             </ul>
         </div>
     </div>
