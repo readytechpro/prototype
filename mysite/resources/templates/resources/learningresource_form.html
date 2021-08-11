@@ -1,29 +1,86 @@
 {% extends "resources/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div>
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset>
-            {% if object %}
-            <legend>Update this Learning Track</legend>
-            {% else %}
-            <legend>Create a new Learning Track</legend>
-            {% endif %}
-            {{ form|crispy }}
-        </fieldset>
-        <div>
-            {% if object %}
-            <button type="submit">Update</button>
-            {% else %}
-            <button type="submit">Create</button>
-            {% endif %}        
-        </div>
-    </form>
-    <br>
-    <hr>
+<header class="text-center">
     {% if object %}
-    <small><a href="{% url 'resources:resource_delete' object.pk %}">Delete this Learning Track</a></small>
+    <h1 class="text-black-50">Update Resource</h1>
+    {% else %}
+    <h1 class="text-black-50">Add New Resource</h1>
     {% endif %}
+</header>
+<div class="card border-dark" style="margin: 10px;border-radius: 5px;border-width: 1px;box-shadow: 1px 1px 2px 1px rgba(28,153,84,0.8);">
+    <div class="card-header" style="background: rgba(28,153,84,0.4);">
+        <div class="container">
+            <div class="row">
+                {% if object %}
+                <div class="col-8">
+                    <h5 class="mb-0"><a style="color: black;" href="{% url 'resources:resource_detail' object.pk %}">{{ object.title|title }}</a></h5>
+                </div>
+                <div class="col-4 text-center">
+                    <a href="{% url 'resources:resource_delete' object.pk %}" class="btn btn-outline-danger btn-sm" role="button">Delete Resource</a>
+                </div>
+                {% else %}
+                <div class="col">
+                    <h5 class="mb-0">New Resource</h5>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if object %}
+    <div class="card-body">
+        <h5 style="color: rgb(28,153,84);">Resource Information</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.title }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.notion_link }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.tagline }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.description }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i>
+                <span>
+                    {% for tag in object.tags.all %}
+                    <button class="btn btn-outline-dark btn-sm" type="button">{{ tag }}</button>
+                    {% endfor %}
+                </span>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col" style="background: rgba(28,153,84,0.1);">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                            <h2 class="text-center">Resource Form</h2>
+                            <div class="form-group">{{ form|crispy }}</div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        {% if object %}
+                        <button type="submit" class="btn btn-secondary"><strong>Update</strong> this resource</button>
+                        {% else %}
+                        <button type="submit" class="btn btn-secondary"><strong>Add</strong> resource</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+<div class="card" style="margin: 0px;background: rgba(28,153,84,0.2);">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6"><a class="btn btn-outline-secondary" role="button" style="border-width: 2px;" href="{% url 'resources:all_learning_resources' %}">back to <strong>ALL</strong> Resources</a></div>
+                <div class="col-6"><a class="btn btn-outline-secondary" role="button" style="border-width: 2px;" href="{% url 'resources:my_learning_resources' %}">back to <strong>MY</strong> Resources</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}

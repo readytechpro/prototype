@@ -1,14 +1,67 @@
-{% extends "sitecore/base.html" %}
+{% extends "resources/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div>
-    <form method="POST">
-        {% csrf_token %}
-        <p>Are you sure you want to delete this Learning Track?</p>
-            <p>{{ object }}</p>
-        <div>
-            <button type="submit">PERMANENTLY DELETE {{ object }}</button>
+<header class="text-center">
+    <h1 class="text-black-50">Delete Resource</h1>
+</header>
+<div class="card border-dark" style="margin: 10px;border-radius: 5px;border-width: 1px;box-shadow: 1px 1px 2px 1px rgba(28,153,84,0.8);">
+    <div class="card-header" style="background: rgba(28,153,84,0.4);">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h5 class="mb-0"><a style="color: black;" href="{% url 'resources:resource_detail' object.pk %}">{{ object.title|title }}</a></h5>
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
+    <div class="card-body">
+        <h5 style="color: rgb(28,153,84);">Resource Information</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.title }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.notion_link }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.tagline }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.description }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i>
+                <span>
+                    {% for tag in object.tags.all %}
+                    <button class="btn btn-outline-dark btn-sm" type="button">{{ tag }}</button>
+                    {% endfor %}
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col" style="background: rgba(28,153,84,0.1);">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                            <h2 class="text-center">Are you sure you want to delete this resource?</h2>
+                            <div class="form-group">{{ form|crispy }}</div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-danger"><strong>Permanently Delete</strong> {{ object.title }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+<div class="card" style="margin: 0px;background: rgba(28,153,84,0.2);">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6"><a class="btn btn-outline-secondary" role="button" style="border-width: 2px;" href="{% url 'resources:all_learning_resources' %}">back to <strong>ALL</strong> Resources</a></div>
+                <div class="col-6"><a class="btn btn-outline-secondary" role="button" style="border-width: 2px;" href="{% url 'resources:my_learning_resources' %}">back to <strong>MY</strong> Resources</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}

@@ -1,11 +1,57 @@
 {% extends "resources/base.html" %}
 {% block content %}
+
+<header class="text-center">
+    <h1 class="text-black-50">Learning Resources</h1>
+</header>
+{% if learning_resources  %}
+
+<div class="card">
+    <div class="card-header">
+        {% if user_resources %}
+        <h5 class="mb-0">{{ request.user|title }}'s Learning Resources</h5>
+        {% else %}
+        <h5 class="mb-0">All Learning Resources</h5>
+        {% endif %}
+    </div>
+    <div class="card-body">
+        {% if user_resources %}
+        <p class="card-text">Click on a learning resource to read more about it, modify or delete it, or go to the resource list itself.</p>
+        {% else %}
+        <p class="card-text">Click on a learning resource to read more about it or go to the resource list itself.</p>
+        {% endif %}
+    </div>
+</div>
+{% for resource, color in  learning_resources %}
+</div class="container">
+<div class="card">
+    <div class="card-body" style="background: rgba({{ color.0 }}, {{ color.1 }}, {{ color.2 }}, 0.4);">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <a class="text-muted" href="{% url 'resources:resource_detail' resource.pk %}">{{ resource.title }}</a>
+                        <p class="text-white">{{ resource.tagline }}</p>
+                    </div>
+                    <div class="col-4">
+                        {% for category_tag in resource.tags.all %}
+                        <button class="btn btn-outline-dark btn-sm" type="button">{{ category_tag }}</button>
+                        {% endfor %}
+                    </div>
+                    <div class="col-2">
+                        <a href="{% url 'resources:resource_detail' resource.pk %}" class="btn btn-secondary btn-lg">View</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+There are no volunteer projects
+{% endif %}
+
 {% if learning_resources %}
-    {% if user_resources %}
-    <h2>{{ request.user }}'s learning tracks</h2>
-    {% else %}
-    <h2>All learning tracks</h2>
-    {% endif %}
     {% for resource in learning_resources %}
     <a href="{% url 'resources:resource_detail' resource.pk %}">{{ resource.title }}</a>
     <small><a href="{{ resource.notion_link }}" target="_blank">[Open Link]</a></small>

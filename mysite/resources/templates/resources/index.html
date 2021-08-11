@@ -1,12 +1,26 @@
 {% extends "resources/base.html" %}
+{% load static %}
 {% block content %}
-<h3>Welcome to the Resources app</h3>
-<p>
-    <a href="{% url 'resources:all_learning_resources' %}">All resource lists</a>
-</p>
+<header class="text-center" style="color: rgb(28,153,84);">
+    <h2>Welcome to the Resources App</h2>
+    <img src="{% static 'sitecore/img/short_banner.png' %}">
+</header>
+<div class="card" style="margin: 10px;">
+    <div class="card-header" style="color: rgb(33, 37, 41);background: rgba(28,153,84,0.4);">
+        <a href="{% url 'resources:all_learning_resources' %}"><h5 class="mb-0" style="color: #ffffff;">All Resource Lists</h5></a>
+    </div>
+    <div class="card-body">
+        <p class="card-text">View all currently available resource lists, search, or browse by subject.&nbsp;</p>
+    </div>
+</div>
 {% if user_tracks %}
-<p>
-    <a href="{% url 'resources:my_learning_resources' %}">My resource lists [{{ user_tracks }}]</a>
-</p>
+<div class="card" style="margin: 10px;">
+    <div class="card-header" style="background: rgba(28,153,84,0.4);">
+        <a href="{% url 'resources:my_learning_resources' %}"><h5 class="mb-0" style="color: #ffffff;">My Resource Lists&nbsp;<button class="btn btn-secondary" type="button">{{ user_tracks }}</button></h5></a>
+    </div>
+    <div class="card-body">
+        <p class="card-text">View the resource lists you have created, are currently managing, or are subscribed to.</p>
+    </div>
+</div>
 {% endif %}
 {% endblock content %}

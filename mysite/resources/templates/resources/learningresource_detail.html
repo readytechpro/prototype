@@ -1,24 +1,60 @@
 {% extends "resources/base.html" %}
 {% block content %}
-<h1>
-    Learning Track "{{ object.title }}" Detail
-</h1>
-{% if can_edit %}
-<p>
-    <small><a href="{% url 'resources:resource_update' object.pk %}">Edit this Learning Track</a></small>
-</p>
-{% endif %}
-<p>Title: {{object.title}}</p>
-<p>
-    Link url: {{object.notion_link}} 
-    <small><a href="{{ object.notion_link }}" target="_blank">Follow Link</a></small>
-</p>
-{% if user_tracks %}
-<p>
-    <a href="{% url 'resources:my_learning_resources' %}">Back to my learning tracks</a>
-</p>
-{% endif %}
-<p>
-    <a href="{% url 'resources:all_learning_resources' %}">Back to all learning tracks</a>
-</p>
+<header class="text-center">
+    <h1 class="text-black-50">Resource Detail</h1>
+</header>
+<div class="card border-dark" style="margin: 10px;border-radius: 5px;border-width: 1px;box-shadow: 1px 1px 2px 1px rgba(28,153,84,0.8);">
+    <div class="card-header" style="background: rgba(28,153,84,0.4);">
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <h5 class="mb-0">{{ object.title|title }}</h5>
+                </div>
+                {% if can_edit %}
+                <div class="col-4 text-center">
+                    <a href="{% url 'resources:resource_update' object.pk %}" class="btn btn-outline-secondary btn-sm" role="button">Edit Resource</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <h5 style="color: rgb(28,153,84);">Resource Information</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.title }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.notion_link }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.tagline }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i><span>{{ object.description }}</span></li>
+            <li class="list-group-item"><i class="fa fa-check-circle-o" style="margin: 5px;color: #1c9954;"></i>
+                <span>
+                    {% for tag in object.tags.all %}
+                    <button class="btn btn-outline-dark btn-sm" type="button">{{ tag }}</button>
+                    {% endfor %}
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <p>{{ object.notion_link }}</p>
+                </div>
+                <div class="col-4 text-center"><a href="{{ object.notion_link }}" class="btn btn-secondary" role="button" target="_blank">Visit Resource Link</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="margin: 0px;background: rgba(28,153,84,0.2);">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6"><a href="{% url 'resources:all_learning_resources' %}" class="btn btn-outline-secondary" role="button" style="border-width: 2px;">back to <strong>ALL</strong> Resources</a></div>
+                {% if user_tracks %}
+                <div class="col-6"><a href="{% url 'resources:my_learning_resources' %}" class="btn btn-outline-secondary" role="button" style="border-width: 2px;">back to <strong>MY</strong> Resources</a></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
