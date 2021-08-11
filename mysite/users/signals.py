@@ -21,13 +21,14 @@ def save_profile(sender, instance, **kwargs):
 def rename_file(sender, instance, **kwargs):
     #change instance filename if it already exists in database by another user
     other_user_images = list(sender.objects.exclude(pk=instance.pk).values_list('image', flat=True))
-    if instance.image in other_user_images:
-        parent_directory = os.path.dirname(instance.image.name)
-        img_basename = os.path.basename(instance.image.name)
-        basename_split = list(os.path.splitext(img_basename))
-        basename_split[0] = f'{basename_split[0]}_{instance.user.pk}'
-        new_filename = os.path.join(parent_directory, ''.join(basename_split))
-        instance.image.name = new_filename
+    if not instance.image.name == 'default.jpg':
+        if instance.image in other_user_images:
+            parent_directory = os.path.dirname(instance.image.name)
+            img_basename = os.path.basename(instance.image.name)
+            basename_split = list(os.path.splitext(img_basename))
+            basename_split[0] = f'{basename_split[0]}_{instance.user.pk}'
+            new_filename = os.path.join(parent_directory, ''.join(basename_split))
+            instance.image.name = new_filename
 
 @receiver(pre_save, sender=Profile)
 def delete_old_image(sender, instance, **kwargs):
