@@ -60,10 +60,13 @@ class UserLearningResourceListView(LoginRequiredMixin, UserPassesTestMixin, List
 
     def test_func(self):
         queryset = self.get_queryset()
-        if queryset.first().user == self.request.user:
-            return True
+        if len(queryset) > 0:
+            if queryset.first().user == self.request.user:
+                return True
+            else:
+                return False
         else:
-            return False
+            return True
         
 
 class LearningResourceDetailView(LoginRequiredMixin, DetailView):

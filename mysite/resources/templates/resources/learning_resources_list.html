@@ -16,7 +16,11 @@
     </div>
     <div class="card-body">
         {% if user_resources %}
+        {% if learning|length %}
         <p class="card-text">Click on a learning resource to read more about it, modify or delete it, or go to the resource list itself.</p>
+        {% else %}
+        <p class="card-text">You don't have any learning resources yet. Go to the "<a href="{% url 'resources:resource_create' %}">add resource</a>" link to add your first resource.</p>
+        {% endif %}
         {% else %}
         <p class="card-text">Click on a learning resource to read more about it or go to the resource list itself.</p>
         {% endif %}
